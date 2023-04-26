@@ -1,0 +1,8 @@
+/build
+gradlew
+gradlew.bat
+/.idea/
+/.idea/vcs.xml
+/.idea/kotlinc.xml
+/.idea/misc.xml
+/.idea/compiler.xml
