@@ -17,7 +17,7 @@ Note: The Maven repository address needs to be configured in both 'buildscript' 
 
 (2) If you are using Gradle for integration, add the following code to your project's build.gradle:
 ```kotlin
-implementation 'dev.deeplink.sdk:attribution:2.2.7'
+implementation 'dev.deeplink.sdk:attribution:2.3.0'
 ```
 
 Step 3: Configure AndroidManifest
@@ -73,7 +73,7 @@ import dev.deeplink.sdk.config.ThirdPartyConfig
 
 val thirdPartyConfig = ThirdPartyConfig().apply {
     this.metaAppId = "Meta appId"
-    this.appsFlyerAppId = "AppsFlyer appId"
+    this.appsFlyerDevKey = "AppsFlyer Dev Key"
 }
 AttrSdk.init(context, "Appid obtained in the first step", thirdPartyConfig,
             object : OnInitializationCallback {

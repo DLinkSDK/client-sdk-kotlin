@@ -62,7 +62,7 @@ class CustomApplication : Application() {
 
         val thirdPartyConfig = ThirdPartyConfig().apply {
             this.metaAppId = "Meta appId"
-            //this.appsFlyerAppId = "AppsFlyer appId"
+            this.appsFlyerDevKey = "AppsFlyer Dev Key"
         }
         AttrSdk.init(this, "Appid obtained from https://console.dlink.cloud", thirdPartyConfig,
             object : OnInitializationCallback {
