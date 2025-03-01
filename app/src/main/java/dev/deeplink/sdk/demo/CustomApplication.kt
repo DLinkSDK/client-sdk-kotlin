@@ -45,7 +45,7 @@ class CustomApplication : Application() {
         AttrSdk.setGaid("ABCD-EFGH-IJKL-MNOP")
 
         //[Optional] For pre-installed apps, developers can pass Custom CampaignName and Custom UtmSource for installation attribution
-        // AttrSdk.setPreInstall(true, "A-B-C-D", "A-B-C-D")
+        AttrSdk.setPreInstall(true, "A-B-C-D", "A-B-C-D")
 
         AttrSdk.setOnAttributionListener(object : OnAttributionListener {
 
