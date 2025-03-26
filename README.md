@@ -1,8 +1,8 @@
 # client-sdk-kotlin
 
-Step 1: Get the Appid
+Step 1: Get the Account ID
 
-Register an account at [https://console.dlink.cloud/](https://console.dlink.cloud). After creating an app on the platform, get the corresponding Appid of the app.
+Register an account at [https://console.dlink.cloud/](https://console.dlink.cloud). After creating an app on the platform, get the corresponding Account ID of the app.
 
 Step 2: Get the SDK
 
@@ -75,7 +75,7 @@ val thirdPartyConfig = ThirdPartyConfig().apply {
     this.metaAppId = "Meta appId"
     this.appsFlyerDevKey = "AppsFlyer Dev Key"
 }
-AttrSdk.init(context, "Appid obtained in the first step", thirdPartyConfig,
+AttrSdk.init(context, "Account ID obtained in the first step", thirdPartyConfig,
             object : OnInitializationCallback {
                 override fun onCompleted(code: Int) {
                     Log.i("Test", "onCompleted -> code($code)")
@@ -108,7 +108,7 @@ AttrSdk.setOnAttributionListener(object : OnAttributionListener {
         Log.e("Test","onAttributionFail -> $errCode")
     }
 })
-AttrSdk.init(context, "Appid obtained in step one")
+AttrSdk.init(context, "Account ID obtained in step one")
 ```
 
 Directly obtain attribution results
@@ -119,6 +119,6 @@ It should be noted that the method for directly obtaining attribution results wi
 ```kotlin
 import dev.deeplink.sdk.AttrSdk
 
-AttrSdk.init(context, "Appid obtained in step one")
+AttrSdk.init(context, "Account ID obtained in step one")
 val attribution = AttrSdk.getAttribution()
 ```
