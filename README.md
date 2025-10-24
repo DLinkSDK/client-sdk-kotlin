@@ -1,8 +1,8 @@
 # client-sdk-kotlin
 
-Step 1: Get the Appid
+Step 1: Get the Account ID
 
-Register an account at [https://console.dlink.cloud/](https://console.dlink.cloud). After creating an app on the platform, get the corresponding Appid of the app.
+Register an account at [https://console.dlink.cloud/](https://console.dlink.cloud). After creating an app on the platform, get the corresponding Account ID of the app.
 
 Step 2: Get the SDK
 
@@ -17,7 +17,7 @@ Note: The Maven repository address needs to be configured in both 'buildscript' 
 
 (2) If you are using Gradle for integration, add the following code to your project's build.gradle:
 ```kotlin
-implementation 'dev.deeplink.sdk:attribution:2.3.3'
+implementation 'dev.deeplink.sdk:attribution:2.4.7'
 ```
 
 Step 3: Configure AndroidManifest
@@ -40,6 +40,11 @@ If you enable FB InstallReferrer attribution, you need to add the following conf
         android:name="com.facebook.sdk.ClientToken"
         android:value="xxxx" />
 </application>
+```
+
+If you enable AppsFlyer, you need to add the following configuration:
+```kotlin
+implementation("com.appsflyer:af-android-sdk:6.12.2")
 ```
 
 If you need to add obfuscation during packaging, please add the following code to the obfuscation configuration file:
@@ -75,7 +80,7 @@ val thirdPartyConfig = ThirdPartyConfig().apply {
     this.metaAppId = "Meta appId"
     this.appsFlyerDevKey = "AppsFlyer Dev Key"
 }
-AttrSdk.init(context, "Appid obtained in the first step", thirdPartyConfig,
+AttrSdk.init(context, "ACCOUNT_ID","DEV_TOKEN", thirdPartyConfig,
             object : OnInitializationCallback {
                 override fun onCompleted(code: Int) {
                     Log.i("Test", "onCompleted -> code($code)")
@@ -108,7 +113,7 @@ AttrSdk.setOnAttributionListener(object : OnAttributionListener {
         Log.e("Test","onAttributionFail -> $errCode")
     }
 })
-AttrSdk.init(context, "Appid obtained in step one")
+AttrSdk.init(context, "ACCOUNT_ID","DEV_TOKEN")
 ```
 
 Directly obtain attribution results
@@ -119,6 +124,6 @@ It should be noted that the method for directly obtaining attribution results wi
 ```kotlin
 import dev.deeplink.sdk.AttrSdk
 
-AttrSdk.init(context, "Appid obtained in step one")
+AttrSdk.init(context, "ACCOUNT_ID","DEV_TOKEN")
 val attribution = AttrSdk.getAttribution()
 ```

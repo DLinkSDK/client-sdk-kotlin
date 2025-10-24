@@ -3,8 +3,13 @@ package dev.deeplink.sdk.demo
 import android.app.Application
 import android.util.Log
 import dev.deeplink.sdk.AttrSdk
+import dev.deeplink.sdk.InAppEventType
 import dev.deeplink.sdk.OnAttributionListener
+import dev.deeplink.sdk.OnExtraInfoListener
 import dev.deeplink.sdk.OnInitializationCallback
+import dev.deeplink.sdk.bean.OrderInfo
+import dev.deeplink.sdk.bean.ProductInfo
+import dev.deeplink.sdk.bean.UserInfo
 import dev.deeplink.sdk.config.ThirdPartyConfig
 import org.json.JSONObject
 
@@ -19,7 +24,7 @@ class CustomApplication : Application() {
 
         //[Optional] This property is used to identify the source of the installation package to better understand how users obtain the app.
         //You can set the property value before initializing the SDK. If not passed in or null is passed in, the default is empty
-        AttrSdk.setPackageSource("GoogleStore")
+        AttrSdk.setPackageSource("PACKAGE_SOURCE")
 
         //[Optional] Defaults to false. You can set the property value before initializing the SDK.
         //When true is passed, it means that the developer wants to customize the device ID.
@@ -29,7 +34,7 @@ class CustomApplication : Application() {
 
         //[Optional] By default, the SDK will automatically generate a device ID.
         //The custom device ID passed by the developer will take effect only when AttrSdk.setWaitForDeviceId is passed true.
-        AttrSdk.setDeviceId("A-B-C-D")
+        AttrSdk.setDeviceId("DEVICE_ID")
 
         //[Optional] Defaults to false. You can set the property value before initializing the SDK.
         // When true is passed, it means that the developer wants to customize the account ID to associate the account with the attribution information.
@@ -38,14 +43,14 @@ class CustomApplication : Application() {
         AttrSdk.setWaitForAccountId(true)
 
         //[Optional] Defaults to empty. Used to associate the account system in the developer's business logic with the attribution information.
-        AttrSdk.setAccountId("1234")
+        AttrSdk.setAccountId("ACCOUNT_ID")
 
         //[Optional] By default, the SDK will automatically obtain Gaid, and developers do not need to set it manually
         //You can set the property value before initializing the SDK.
-        AttrSdk.setGaid("ABCD-EFGH-IJKL-MNOP")
+        AttrSdk.setGaid("GAID")
 
         //[Optional] For pre-installed apps, developers can pass Custom CampaignName and Custom UtmSource for installation attribution
-        AttrSdk.setPreInstall(true, "A-B-C-D", "A-B-C-D")
+        // AttrSdk.setPreInstall(true, "A-B-C-D", "A-B-C-D")
 
         AttrSdk.setOnAttributionListener(object : OnAttributionListener {
 
@@ -61,19 +66,119 @@ class CustomApplication : Application() {
         })
 
         val thirdPartyConfig = ThirdPartyConfig().apply {
-            this.metaAppId = "Meta appId"
-            this.appsFlyerDevKey = "AppsFlyer Dev Key"
+            //[Optional]
+            this.metaAppId = "META_APP_ID"
+            //[Optional]
+            this.appsFlyerDevKey = "APPS_FLYER_DEV_KEY"
         }
-        AttrSdk.init(this, "Appid obtained from https://console.dlink.cloud", thirdPartyConfig,
+
+        AttrSdk.setOnExtraInfoListener(object : OnExtraInfoListener {
+            override fun onUpdate(value: Map<String, Any>) {
+                Log.i(TAG, "onUpdate -> $value")
+            }
+        })
+
+        AttrSdk.init(
+            this, "ACCOUNT_ID", "DEV_TOKEN", thirdPartyConfig,
             object : OnInitializationCallback {
                 override fun onCompleted(code: Int) {
                     Log.i(TAG, "onCompleted -> code($code)")
                     if (code == 0) {
-                        //Initialization successful
+                        //Initialization success
+                        logEvents()
                     } else {
                         //Initialization failed, for specific failure reasons refer to the code interpretation
                     }
                 }
             })
+    }
+
+    private fun logEvents(){
+        AttrSdk.setUserInfo(UserInfo().apply {
+            this.countryName = "COUNTRY_NAME"
+            this.city = "CITY"
+            this.emails = mutableListOf("EMAIL1", "EMAIL2")
+            this.phones = mutableListOf("PHONE1", "PHONE2")
+            this.firstName = "FIRST_NAME"
+            this.lastName = "LAST_NAME"
+        })
+        AttrSdk.logEvent(InAppEventType.VIEW_CONTENT, hashMapOf<String, Any>().apply {
+            this[AttrSdk.ORDER_INFO] = OrderInfo(
+                currency = "USD",
+                value = 9.9f,
+                contents = mutableListOf<ProductInfo>().apply {
+                    this.add(
+                        ProductInfo(
+                            productId = "PRODUCT_ID",
+                            "PRODUCT_NAME",
+                            quantity = 1,
+                            value = 9.9f
+                        )
+                    )
+                },
+                searchString = "",
+                subscribeDay = ""
+            )
+        })
+        AttrSdk.logEvent(InAppEventType.ADD_TO_CART, hashMapOf<String, Any>().apply {
+            this[AttrSdk.ORDER_INFO] = OrderInfo(
+                currency = "USD",
+                value = 9.9f,
+                contents = mutableListOf<ProductInfo>().apply {
+                    this.add(
+                        ProductInfo(
+                            productId = "PRODUCT_ID",
+                            "PRODUCT_NAME",
+                            quantity = 1,
+                            value = 9.9f
+                        )
+                    )
+                },
+                searchString = "",
+                subscribeDay = ""
+            )
+        })
+
+        AttrSdk.logEvent(InAppEventType.PURCHASE, hashMapOf<String, Any>().apply {
+            //Please enter the order ID
+            this[AttrSdk.EVENT_ID] = "ORDER_ID"
+            this[AttrSdk.ORDER_INFO] = OrderInfo(
+                currency = "USD",
+                value = 9.9f,
+                contents = mutableListOf<ProductInfo>().apply {
+                    this.add(
+                        ProductInfo(
+                            productId = "PRODUCT_ID",
+                            "PRODUCT_NAME",
+                            quantity = 1,
+                            value = 9.9f
+                        )
+                    )
+                },
+                searchString = "",
+                subscribeDay = ""
+            )
+        })
+
+        AttrSdk.logEvent(InAppEventType.SUBSCRIBE, hashMapOf<String, Any>().apply {
+            //Please enter the order ID
+            this[AttrSdk.EVENT_ID] = "ORDER_ID"
+            this[AttrSdk.ORDER_INFO] = OrderInfo(
+                currency = "USD",
+                value = 9.9f,
+                contents = mutableListOf<ProductInfo>().apply {
+                    this.add(
+                        ProductInfo(
+                            productId = "PRODUCT_ID",
+                            "PRODUCT_NAME",
+                            quantity = 1,
+                            value = 9.9f
+                        )
+                    )
+                },
+                searchString = "",
+                subscribeDay = "30"
+            )
+        })
     }
 }

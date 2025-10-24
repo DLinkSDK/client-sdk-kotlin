@@ -1,22 +1,17 @@
 [versions]
 agp = "8.4.0"
 kotlin = "1.9.0"
-junit = "4.13.2"
-junitVersion = "1.2.1"
-espressoCore = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
-attribution = "2.3.3"
+attribution = "2.4.7"
+appsFlyer = "6.12.2"
 
 [libraries]
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 attribution = { group = "dev.deeplink.sdk", name = "attribution", version.ref = "attribution" }
+appsflyer = { group = "com.appsflyer", name = "af-android-sdk", version.ref = "appsFlyer" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
