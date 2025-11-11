@@ -1,8 +1,8 @@
 # client-sdk-kotlin
 
-Step 1: Get the Account ID
+Step 1: Get the Account ID and DevToken
 
-Register an account at [https://console.dlink.cloud/](https://console.dlink.cloud). After creating an app on the platform, get the corresponding Account ID of the app.
+Register an account at [https://console.dlink.cloud/](https://console.dlink.cloud). After creating an app on the platform, get the corresponding Account ID and DevToken of the app.
 
 Step 2: Get the SDK
 
