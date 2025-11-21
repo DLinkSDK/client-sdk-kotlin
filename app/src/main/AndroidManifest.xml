@@ -14,7 +14,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name="dev.deeplink.sdk.demo.TestActivity"
+            android:name="dev.deeplink.sdk.demo.MainActivity"
             android:exported="true">
 
             <intent-filter>
@@ -31,6 +31,27 @@
         <meta-data
             android:name="com.facebook.sdk.ClientToken"
             android:value="xxxx" />
+
+        <activity
+            android:name=".AppLinkActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:launchMode="singleTask">
+
+            <intent-filter android:autoVerify="true">
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Replace "https://xxx.deeplink.dev" with your AppLink domain provided by Dlink -->
+                <data
+                    android:host="https://xxx.deeplink.dev"
+                    android:scheme="https" />
+            </intent-filter>
+
+        </activity>
 
     </application>
 
