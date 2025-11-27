@@ -93,7 +93,7 @@ class CustomApplication : Application() {
             })
     }
 
-    private fun logEvents(){
+    private fun logEvents() {
         AttrSdk.setUserInfo(UserInfo().apply {
             this.countryName = "COUNTRY_NAME"
             this.city = "CITY"
@@ -101,83 +101,111 @@ class CustomApplication : Application() {
             this.phones = mutableListOf("PHONE1", "PHONE2")
             this.firstName = "FIRST_NAME"
             this.lastName = "LAST_NAME"
+            this.fbLoginId = "FB_LOGIN_ID"
         })
+
+        //Users enter the product details page.
         AttrSdk.logEvent(InAppEventType.VIEW_CONTENT, hashMapOf<String, Any>().apply {
             this[AttrSdk.ORDER_INFO] = OrderInfo(
-                currency = "USD",
-                value = 9.9f,
+                currency = "", //Ignore
+                value = 0f, //Ignore
                 contents = mutableListOf<ProductInfo>().apply {
                     this.add(
                         ProductInfo(
-                            productId = "PRODUCT_ID",
-                            "PRODUCT_NAME",
-                            quantity = 1,
-                            value = 9.9f
+                            productId = "CONTENT_ID", //Required
+                            productName = "CONTENT_NAME", //Required
+                            quantity = 1, //Required
+                            value = 0f //Ignore
                         )
                     )
                 },
-                searchString = "",
-                subscribeDay = ""
+                searchString = "", //Ignore
+                subscribeDay = "" //Ignore
             )
         })
+
+        //The user clicks the "Add to Cart" button.
         AttrSdk.logEvent(InAppEventType.ADD_TO_CART, hashMapOf<String, Any>().apply {
             this[AttrSdk.ORDER_INFO] = OrderInfo(
-                currency = "USD",
-                value = 9.9f,
+                currency = "USD",  //Required
+                value = 9.9f,  //Required
                 contents = mutableListOf<ProductInfo>().apply {
                     this.add(
                         ProductInfo(
-                            productId = "PRODUCT_ID",
-                            "PRODUCT_NAME",
-                            quantity = 1,
-                            value = 9.9f
+                            productId = "PRODUCT_ID",  //Required
+                            productName = "PRODUCT_NAME",  //Required
+                            quantity = 1,  //Required
+                            value = 9.9f  //Required
                         )
                     )
                 },
-                searchString = "",
-                subscribeDay = ""
+                searchString = "", //Ignore
+                subscribeDay = "" //Ignore
             )
         })
 
+        //The user has entered the checkout process, but has not yet completed it.
+        AttrSdk.logEvent(InAppEventType.INITIATE_CHECK_OUT, hashMapOf<String, Any>().apply {
+            this[AttrSdk.ORDER_INFO] = OrderInfo(
+                currency = "USD",  //Required
+                value = 9.9f,  //Required
+                contents = mutableListOf<ProductInfo>().apply {
+                    this.add(
+                        ProductInfo(
+                            productId = "PRODUCT_ID",  //Required
+                            productName = "PRODUCT_NAME",  //Required
+                            quantity = 1,  //Required
+                            value = 9.9f  //Required
+                        )
+                    )
+                },
+                searchString = "", //Ignore
+                subscribeDay = "" //Ignore
+            )
+        })
+
+        //
+        //Someone has completed the purchase or checkout process.
         AttrSdk.logEvent(InAppEventType.PURCHASE, hashMapOf<String, Any>().apply {
-            //Please enter the order ID
-            this[AttrSdk.EVENT_ID] = "ORDER_ID"
+            //Please enter your real order ID.
+            this[AttrSdk.EVENT_ID] = "ORDER_ID" //Required
             this[AttrSdk.ORDER_INFO] = OrderInfo(
-                currency = "USD",
-                value = 9.9f,
+                currency = "USD", //Required
+                value = 9.9f, //Required
                 contents = mutableListOf<ProductInfo>().apply {
                     this.add(
                         ProductInfo(
-                            productId = "PRODUCT_ID",
-                            "PRODUCT_NAME",
-                            quantity = 1,
-                            value = 9.9f
+                            productId = "PRODUCT_ID", //Required
+                            productName = "PRODUCT_NAME", //Required
+                            quantity = 1, //Required
+                            value = 9.9f //Required
                         )
                     )
                 },
-                searchString = "",
-                subscribeDay = ""
+                searchString = "",  //Ignore
+                subscribeDay = ""  //Ignore
             )
         })
 
+        //Someone has applied for a paid subscription service for the goods or services you provide.
         AttrSdk.logEvent(InAppEventType.SUBSCRIBE, hashMapOf<String, Any>().apply {
-            //Please enter the order ID
-            this[AttrSdk.EVENT_ID] = "ORDER_ID"
+            //Please enter your real order ID.
+            this[AttrSdk.EVENT_ID] = "ORDER_ID"  //Required
             this[AttrSdk.ORDER_INFO] = OrderInfo(
-                currency = "USD",
-                value = 9.9f,
+                currency = "USD", //Required
+                value = 9.9f, //Required
                 contents = mutableListOf<ProductInfo>().apply {
                     this.add(
                         ProductInfo(
-                            productId = "PRODUCT_ID",
-                            "PRODUCT_NAME",
-                            quantity = 1,
-                            value = 9.9f
+                            productId = "PRODUCT_ID", //Required
+                            productName = "PRODUCT_NAME", //Required
+                            quantity = 1, //Required
+                            value = 9.9f //Required
                         )
                     )
                 },
-                searchString = "",
-                subscribeDay = "30"
+                searchString = "",  //Ignore
+                subscribeDay = "30" //Required
             )
         })
     }
