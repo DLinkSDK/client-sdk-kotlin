@@ -128,14 +128,14 @@ class CustomApplication : Application() {
         AttrSdk.logEvent(InAppEventType.ADD_TO_CART, hashMapOf<String, Any>().apply {
             this[AttrSdk.ORDER_INFO] = OrderInfo(
                 currency = "USD",  //Required
-                value = 9.9f,  //Required
+                value = 9.9f,  //Required, Total Price
                 contents = mutableListOf<ProductInfo>().apply {
                     this.add(
                         ProductInfo(
                             productId = "PRODUCT_ID",  //Required
                             productName = "PRODUCT_NAME",  //Required
                             quantity = 1,  //Required
-                            value = 9.9f  //Required
+                            value = 9.9f  //Required, Price Each
                         )
                     )
                 },
@@ -148,14 +148,14 @@ class CustomApplication : Application() {
         AttrSdk.logEvent(InAppEventType.INITIATE_CHECK_OUT, hashMapOf<String, Any>().apply {
             this[AttrSdk.ORDER_INFO] = OrderInfo(
                 currency = "USD",  //Required
-                value = 9.9f,  //Required
+                value = 9.9f,  //Required, Total Price
                 contents = mutableListOf<ProductInfo>().apply {
                     this.add(
                         ProductInfo(
                             productId = "PRODUCT_ID",  //Required
                             productName = "PRODUCT_NAME",  //Required
                             quantity = 1,  //Required
-                            value = 9.9f  //Required
+                            value = 9.9f  //Required, Price Each
                         )
                     )
                 },
@@ -171,14 +171,14 @@ class CustomApplication : Application() {
             this[AttrSdk.EVENT_ID] = "ORDER_ID" //Required
             this[AttrSdk.ORDER_INFO] = OrderInfo(
                 currency = "USD", //Required
-                value = 9.9f, //Required
+                value = 9.9f,  //Required, Total Price
                 contents = mutableListOf<ProductInfo>().apply {
                     this.add(
                         ProductInfo(
                             productId = "PRODUCT_ID", //Required
                             productName = "PRODUCT_NAME", //Required
                             quantity = 1, //Required
-                            value = 9.9f //Required
+                            value = 9.9f  //Required, Price Each
                         )
                     )
                 },
@@ -193,14 +193,14 @@ class CustomApplication : Application() {
             this[AttrSdk.EVENT_ID] = "ORDER_ID"  //Required
             this[AttrSdk.ORDER_INFO] = OrderInfo(
                 currency = "USD", //Required
-                value = 9.9f, //Required
+                value = 9.9f,  //Required, Total Price of contents
                 contents = mutableListOf<ProductInfo>().apply {
                     this.add(
                         ProductInfo(
                             productId = "PRODUCT_ID", //Required
                             productName = "PRODUCT_NAME", //Required
                             quantity = 1, //Required
-                            value = 9.9f //Required
+                            value = 9.9f  //Required, Price Each
                         )
                     )
                 },
