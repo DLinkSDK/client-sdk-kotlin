@@ -160,7 +160,7 @@ class CustomApplication : Application() {
                     )
                 },
                 searchString = "", //Ignore
-                subscribeDay = "" //Ignore
+                subscribeDay = "" //Optional, If it's a subscription product, please enter the number of subscription days.
             )
         })
 
