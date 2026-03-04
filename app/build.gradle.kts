@@ -46,4 +46,5 @@ dependencies {
     implementation(libs.material)
     implementation(libs.attribution)
     implementation(libs.appsflyer)
+    implementation(libs.adjust)
 }

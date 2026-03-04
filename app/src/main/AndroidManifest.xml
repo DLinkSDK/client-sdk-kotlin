@@ -45,9 +45,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <!-- Replace "https://xxx.deeplink.dev" with your AppLink domain provided by Dlink -->
                 <data
-                    android:host="https://xxx.deeplink.dev"
+                    android:host="apps.deeplink.dev"
+                    android:path="/xxxx"
                     android:scheme="https" />
             </intent-filter>
 
