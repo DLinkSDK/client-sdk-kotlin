@@ -17,7 +17,7 @@ Note: The Maven repository address needs to be configured in both 'buildscript' 
 
 (2) If you are using Gradle for integration, add the following code to your project's build.gradle:
 ```groovy
-implementation 'dev.deeplink.sdk:attribution:2.5.5'
+implementation 'dev.deeplink.sdk:attribution:2.5.6'
 ```
 
 Step 3: Configure AndroidManifest
